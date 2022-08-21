@@ -19,6 +19,14 @@ function Character(data) {
       </div>`;
   };
 
+  this.takeDamage = function(attackScoreArray) {
+    const totalAttackScore = attackScoreArray.reduce(function(total, currentDieValue) {
+      return total + currentDieValue;
+    });
+
+    this.health -= totalAttackScore;
+  };
+
   this.getDiceHtml = function() {
     this.currentDiceScore = getDiceRollArray(this.diceCount);
     this.diceArray = this.currentDiceScore.map(function(num) {
