@@ -6,8 +6,7 @@ function Character(data) {
   this.diceArray = getDicePlaceholderHtml(this.diceCount);
 
   this.getCharacterHtml = function () {
-    const { name, avatar, health, diceCount } = this;
-    const diceHtml = this.getDiceHtml(diceCount);
+    const { name, avatar, health, diceCount, diceArray } = this;
 
     return `
       <div class="character-card">
@@ -15,17 +14,16 @@ function Character(data) {
         <img class="avatar" src="${avatar}" />
         <div class="health">health: <b> ${health} </b></div>
         <div class="dice-container">
-            ${this.diceArray} 
+            ${diceArray} 
         </div>
       </div>`;
   };
 
-  this.getDiceHtml = function (diceCount) {
-    return getDiceRollArray(diceCount)
-      .map(function (die) {
-        return `<div class="dice">${die}</div>`;
-      })
-      .join('');
+  this.getDiceHtml = function() {
+    this.currentDiceScore = getDiceRollArray(this.diceCount);
+    this.diceArray = this.currentDiceScore.map(function(num) {
+      return `<div class='dice'>${num}</div>`;
+    }).join('');
   };
 }
 
