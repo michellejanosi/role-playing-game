@@ -14,15 +14,13 @@ function Character(data) {
         <img class="avatar" src="${avatar}" />
         <div class="health">health: <b> ${health} </b></div>
         <div class="dice-container">
-            ${diceArray} 
+            ${diceArray}
         </div>
       </div>`;
   };
 
   this.takeDamage = function(attackScoreArray) {
-    const totalAttackScore = attackScoreArray.reduce(function(total, currentDieValue) {
-      return total + currentDieValue;
-    });
+    const totalAttackScore = attackScoreArray.reduce((total, currentDieValue) => total + currentDieValue);
 
     this.health -= totalAttackScore;
 
@@ -34,9 +32,8 @@ function Character(data) {
 
   this.getDiceHtml = function() {
     this.currentDiceScore = getDiceRollArray(this.diceCount);
-    this.diceArray = this.currentDiceScore.map(function(num) {
-      return `<div class='dice'>${num}</div>`;
-    }).join('');
+    this.diceArray = this.currentDiceScore.map(num =>
+      `<div class='dice'>${num}</div>`).join('');
   };
 }
 
