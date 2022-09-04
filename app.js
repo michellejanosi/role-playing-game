@@ -15,9 +15,18 @@ function attack() {
   monster.takeDamage(wizard.currentDiceScore);
   render();
 
-  if (wizard.dead || monster.dead) {
+  if (wizard.dead) {
     gameOver();
+  } else if (monster.dead) {
+      if (monsters.length > 0) {
+        monster = getNewMonster();
+        render();
+      } else {
+        gameOver();
+    }
   }
+
+
 }
 
 function gameOver() {
